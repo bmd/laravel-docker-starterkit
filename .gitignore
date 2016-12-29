@@ -4,4 +4,6 @@
 
 .env
 
+docker/containers/db/.data
+
 composer.lock

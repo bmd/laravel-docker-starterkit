@@ -1,0 +1,52 @@
+# -----------------------------------------------
+# Authentication Web Server
+# -----------------------------------------------
+nginx:
+  image: nginx:1.11
+  links:
+    - laravel
+  ports:
+    - ${APP_PORT}:80
+  volumes:
+    - ./docker/etc/nginx/server.nginx:/etc/nginx/conf.d/default.conf
+  volumes_from:
+    - laravel
+
+# -----------------------------------------------
+# Laravel Application
+# -----------------------------------------------
+laravel:
+  build: ./docker/containers/application
+  links:
+   - redis
+   - mysql
+  volumes:
+  - .:/var/www/app
+  working_dir: /var/www/app
+
+# -----------------------------------------------
+# MySQL Database
+# -----------------------------------------------
+mysql:
+  image: mysql:5.7
+  restart: always
+  volumes:
+    - ./docker/containers/db/.data/db:/var/lib/mysql
+    - ./docker/containers/db/conf.d:/etc/mysql/conf.d
+  environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+  expose:
+      - "${DB_PORT}"
+  ports:
+    - "${DB_PUBLIC_PORT}:${DB_PORT}"
+
+# -----------------------------------------------
+# Redis Cache
+# -----------------------------------------------
+redis:
+  image: redis:3.0
+  volumes:
+    - ./docker/containers/cache/.data:/data
