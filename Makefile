@@ -7,6 +7,9 @@ include .env
 #    when developing the application
 #############################################################
 install: build composer
+	php artisan key:generate
+	php artisan ide-helper:generate
+	php artisan ide-helper:meta
 
 build: build-util
 	docker-compose build
@@ -63,6 +66,9 @@ composer:
 
 composer-update:
 	./docker/bin/composer.sh update
+	./docker/bin/composer.sh dump-autoload
+    php artisan ide-helper:generate
+    php artisan ide-helper:meta
 
 build-util:
 	docker build -t $(COMPOSE_PROJECT_NAME)/utility:v1 docker/containers/utility/

@@ -4,6 +4,9 @@
 
 .env
 
+.phpstorm.meta.php
+_ide_helper.php
+
 /public/phpdoc
 /storage/phpdoc
 
