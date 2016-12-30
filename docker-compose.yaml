@@ -16,7 +16,7 @@ nginx:
 # Laravel Application
 # -----------------------------------------------
 laravel:
-  build: ./docker/containers/application
+  build: ./docker/containers/laravel
   links:
    - redis
    - mysql
@@ -31,8 +31,8 @@ mysql:
   image: mysql:5.7
   restart: always
   volumes:
-    - ./docker/containers/db/.data/db:/var/lib/mysql
-    - ./docker/containers/db/conf.d:/etc/mysql/conf.d
+    - ./docker/containers/mysql/.data/db:/var/lib/mysql
+    - ./docker/containers/mysql/conf.d:/etc/mysql/conf.d
   environment:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${DB_DATABASE}"
@@ -49,4 +49,4 @@ mysql:
 redis:
   image: redis:3.0
   volumes:
-    - ./docker/containers/cache/.data:/data
+    - ./docker/containers/redis/.data:/data

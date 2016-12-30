@@ -9,4 +9,4 @@ fi
 docker run -it --rm \
     -v `pwd`:/app \
     -w /app \
-    ${COMPOSE_PROJECT_NAME}/utility:v1 php "$@"
+    ${COMPOSE_PROJECT_NAME}/utility:v1 phpdoc "$@"
