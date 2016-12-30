@@ -5,5 +5,6 @@
 .env
 
 docker/containers/db/.data
-
+/public/phpdoc
+/storage/phpdoc
 composer.lock

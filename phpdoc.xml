@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor>
+    <parser>
+        <default-package-name>phpDocumentor</default-package-name>
+        <target>./storage/phpdoc</target>
+    </parser>
+    <transformer>
+        <target>./public/phpdoc</target>
+    </transformer>
+    <files>
+        <directory>./app</directory>
+        <ignore>./app/Http/routes.php</ignore>
+    </files>
+    <plugins>
+        <plugin path="Core" />
+    </plugins>
+    <transformations>
+        <template name="clean" />
+    </transformations>
+</phpdocumentor>
